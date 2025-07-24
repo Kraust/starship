@@ -1,5 +1,24 @@
 # Custom Prompt
-format = '''$all'''
+format = """
+$username\
+$container\
+$hostname\
+$localip\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$env_var\
+$sudo\
+$cmd_duration\
+$status\
+$line_break\
+$time\
+$os\
+$shell\
+"""
 
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
@@ -7,22 +26,43 @@ format = '''$all'''
 # Inserts a blank line between shell prompts
 add_newline = true
 
-# Replace the '❯' symbol in the prompt with '➜'
-[character] # The name of the module we are configuring is 'character'
-success_symbol = '❯(bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
-
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
 
-# [custom.buid-os]
-# command = "echo $'🖥️ ($env.BUILD_OS)'"
-# when = '$env.BUILD_OS'
+[env_var.BUILD_OS]
+variable = "BUILD_OS"
+format = "$symbol [$env_value]($style) "
+symbol = "🖥️"
+style = "bold yellow"
+default = ""
 
-# [custom.buid-arch]
-# command = "echo $'⛩️ ($env.BUILD_ARCH)'"
-# when = '$env.BUILD_ARCH'
+[env_var.BUILD_ARCH]
+variable = "BUILD_ARCH"
+format = "$symbol [$env_value]($style) "
+symbol = "⛩️"
+style = "bold yellow"
+default = ""
 
-# [custom.buid-type]
-# command = "echo $'🐞 ($env.BUILD_TYPE)'"
-# when = '$env.BUILD_TYPE'
+[env_var.CMAKE_BUILD_TYPE]
+variable = "CMAKE_BUILD_TYPE"
+format = "$symbol [$env_value]($style) "
+symbol = "🐞"
+style = "bold yellow"
+default = ""
+
+[hostname]
+ssh_only = false
+
+[container]
+format = '[$name]($style) on '	
+
+[os]
+disabled = false
+
+[status]
+symbol = ''
+success_symbol = ''
+format = '[\[$symbol$signal_name$int\]]($style) '
+map_symbol = true
+disabled = false
