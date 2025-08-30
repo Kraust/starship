@@ -16,8 +16,8 @@ $cmd_duration\
 $status\
 $line_break\
 $time\
-$os\
 $shell\
+@ \
 """
 
 # Get editor completions based on the config schema
